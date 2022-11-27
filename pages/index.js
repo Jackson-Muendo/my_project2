@@ -1,23 +1,32 @@
-import Head from 'next/head'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+export function countdown() {
+  let now = new Date();
+  let evenDate = new Date(2019, 11, 25);
 
-export default function Home() {
-  return (
-    <div className="container">
-      <Head>
-        <title>Next.js Starter!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  let actualTime = now.getTime();
+  let eventTime = evenDate.getTime();
+  let remTime = eventTime - actualTime;
 
-      <main>
-        <Header title="Welcome to my app!" />
-        <p className="description">
-          jackmwexh birthday
-        </p>
-      </main>
+  let s = Math.floor(remTime / 1000);
+  let m = Math.floor(s / 60);
+  let h = Math.floor(m / 60);
+  let d = Math.floor(h / 24);
 
-      <Footer />
-    </div>
-  )
-}
+  h %= 24;
+  m %= 60;
+  s %= 60;
+
+  h = h < 10 ? '0' + h : h;
+  m = m < 10 ? '0' + m : m;
+  s = s < 10 ? '0' + s : s;
+
+  document.querySelector('#days').textContent = d;
+  document.querySelector('#hours').textContent = h;
+  document.querySelector('#minutes').textContent = m;
+  document.querySelector('#seconds').textContent = s;
+
+  setTimeout(countdown, 1000)
+
+
+};
+
+countdown();
